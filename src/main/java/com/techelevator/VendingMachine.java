@@ -10,10 +10,8 @@ public class VendingMachine {
     private final int SLOTCAPACITY = 5;
     private Map<String, Product> slotProducts = new HashMap<>();
 
-    public VendingMachine (Map<String, Product> slotProducts) {
-        this.slotProducts = slotProducts;
 
-
+    public void setSlotProducts(Map<String, Product> slotProducts) {
         Chips potatoCrisps = new Chips("Potato Crisps", new BigDecimal("3.05"), "A1");
         Chips stackers = new Chips("Stackers", new BigDecimal("1.45"), "A2");
         Chips grainWaves = new Chips("Grain Waves", new BigDecimal("2.75"), "A3");
@@ -36,7 +34,29 @@ public class VendingMachine {
 
 
         slotProducts.put("A1", potatoCrisps);
-        slotProducts.
+        slotProducts.put("A2", stackers);
+        slotProducts.put("A3", grainWaves);
+        slotProducts.put("A4", cloudPopcorn);
+        slotProducts.put("B1", moonpie);
+        slotProducts.put("B2", cowtales);
+        slotProducts.put("B3", wonkaBar);
+        slotProducts.put("B4", crunchie);
+        slotProducts.put("C1", cola);
+        slotProducts.put("C2", drsalt);
+        slotProducts.put("C3", mountainmelter);
+        slotProducts.put("C4", heavy);
+        slotProducts.put("D1", uchews);
+        slotProducts.put("D2", littleLeagueChew);
+        slotProducts.put("D3", chiclets);
+        slotProducts.put("D4", triplemint);
+
+
+
+        this.slotProducts = slotProducts;
+
     }
 
+    public Map<String, Product> getSlotProducts() {
+        return slotProducts;
+    }
 }
