@@ -8,59 +8,56 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		Scanner scanner = new Scanner(System.in);
 
+		mainMenu();
+	}
+
+	public static void mainMenu() {
 		System.out.println("(1) Display Vending Machine Items\n(2) Purchase\n(3) Exit");
+		Scanner scanner = new Scanner(System.in);
+		VendingMachine machine = new VendingMachine();
 		String userInput = scanner.nextLine();
-		if (userInput.equals("1")){
+
+		if (userInput.equals("1")) {
 			String filePath = "C:/Users/Student/workspace/java-mini-capstone-module-1-team-2/vendingmachine.csv";
 			File inventory = new File(filePath);
-			try (Scanner scan = new Scanner(inventory)){
+			try (Scanner scan = new Scanner(inventory)) {
 				while (scan.hasNextLine()) {
-					String nextline = scan.nextLine();
-					System.out.println(nextline);
+					String scanLine = scan.nextLine() + ", ";
+					int quantity = machine.getSlotProducts().get(scanLine.substring(0, 2)).getProductQuantity();
+					System.out.println(scanLine + "Quantity: " + quantity);
 				}
-			}catch (FileNotFoundException e){
+
+			} catch (FileNotFoundException e) {
 				System.out.println("File not found.");
 			}
+			// create new method for purchase & feed money
 			System.out.println("Please enter your selection eg. 'A3'");
 			String userSelection = scanner.nextLine().toUpperCase();
 
-			VendingMachine machine = new VendingMachine();
+			//TODO have to hit enter twice. need to fix
+			Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
 
-			 Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
+			//for (String slotProduct: machine.getSlotProducts().keySet()){
 
-
-			if (userProductChoice.getProductQuantity()==0){
+			if (userProductChoice.getProductQuantity() == 0) {
 				System.out.println("Sorry, this item is sold out.");
-				/////////////////// method for return to main method
+				mainMenu();
+			}
+				else if(!machine.getSlotProducts().containsKey(userSelection)) {
+				System.out.println("Invalid selection. Have fun going back to main menu.");
+				mainMenu();
+			}
+				else {
+					userProductChoice.setProductQuantity(userProductChoice.getProductQuantity()-1);
+				}
 
-
-
+			}
 
 
 			}
 
 
+			}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		}
-
-
-
-	}
-}
