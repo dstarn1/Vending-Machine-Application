@@ -10,6 +10,7 @@ public class Beverage extends Product {
         super(productName, price, slotLocation);
 
     }
+    @Override
     public String getDispenseMsg(){
         return dispenseMsg;
     }

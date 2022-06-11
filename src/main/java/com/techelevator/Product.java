@@ -9,6 +9,7 @@ public class Product {
     private BigDecimal price;
     private String slotLocation;
     private int productQuantity = 5;
+    private String dispenseMsg = "";
 
 
     //Constructor
@@ -37,5 +38,9 @@ public class Product {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getDispenseMsg(){
+            return dispenseMsg;
     }
 }

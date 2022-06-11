@@ -8,7 +8,7 @@ public class Chips extends Product {
     public Chips (String productName, BigDecimal price, String slotLocation) {
         super(productName, price, slotLocation);
     }
-
+    @Override
     public String getDispenseMsg(){
         return dispenseMsg;
     }

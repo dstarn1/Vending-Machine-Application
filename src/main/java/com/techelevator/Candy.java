@@ -9,7 +9,7 @@ public class Candy extends Product {
         super(productName, price, slotLocation);
 
     }
-
+    @Override
     public String getDispenseMsg(){
         return dispenseMsg;
     }

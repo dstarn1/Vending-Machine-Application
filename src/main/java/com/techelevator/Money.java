@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -9,6 +11,9 @@ public class Money {
     private BigDecimal amountOwed;
     private BigDecimal amountPaid;
     private BigDecimal changeDue;
+    private int quarter = 0;
+    private int dimes = 0;
+    private int nickels =0;
 
 
 //    public Money(VendingMachine machine) {
@@ -34,6 +39,23 @@ public class Money {
         changeDue= amountPaid.subtract(amountOwed);
         return changeDue;
     }
+    public void returnChangeInCoins(BigDecimal changeDue){
+
+        while(changeDue.compareTo(BigDecimal.valueOf(0.25)) >= 0) {
+        changeDue.subtract( BigDecimal.valueOf(0.25));
+        quarter++;
+        }
+
+        while(changeDue.compareTo(BigDecimal.valueOf(0.10)) >= 0){
+            changeDue.subtract( BigDecimal.valueOf(0.10));
+         dimes++;
+        }
+
+        while(changeDue.compareTo(BigDecimal.valueOf(0.05)) >= 0) {
+            changeDue.subtract( BigDecimal.valueOf(0.05));
+        nickels++;}
+        System.out.println("Your change in quarters: " + quarter + " dimes " + dimes + " nickels " + nickels);
+   }
 
 //    public void purchaseMenu() {
 //        Money money = new Money(machine);

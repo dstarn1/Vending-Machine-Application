@@ -11,7 +11,7 @@ public class Gum extends Product {
         super(productName, price, slotLocation);
 
     }
-
+    @Override
     public String getDispenseMsg () {
         return dispenseMsg;
     }
