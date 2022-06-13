@@ -41,19 +41,21 @@ public class Money {
     }
     public void returnChangeInCoins(BigDecimal changeDue){
 
-        while(changeDue.compareTo(BigDecimal.valueOf(0.25)) >= 0) {
-        changeDue.subtract( BigDecimal.valueOf(0.25));
-        quarter++;
-        }
+        while (changeDue.compareTo(BigDecimal.valueOf(0.00))!=-1) {
 
-        while(changeDue.compareTo(BigDecimal.valueOf(0.10)) >= 0){
-            changeDue.subtract( BigDecimal.valueOf(0.10));
-         dimes++;
-        }
+            if (changeDue.compareTo(BigDecimal.valueOf(0.25)) >= 0) {
+                changeDue = changeDue.subtract(BigDecimal.valueOf(0.25));
+                quarter++;
+            } else if (changeDue.compareTo(BigDecimal.valueOf(0.10)) >= 0) {
+                changeDue = changeDue.subtract(BigDecimal.valueOf(0.10));
+                dimes++;
+            }
 
-        while(changeDue.compareTo(BigDecimal.valueOf(0.05)) >= 0) {
-            changeDue.subtract( BigDecimal.valueOf(0.05));
-        nickels++;}
+        else { //(changeDue.compareTo(new BigDecimal(0.05)) >= 0)
+                changeDue = changeDue.subtract(BigDecimal.valueOf(0.05));
+                nickels++;
+            }
+        }
         System.out.println("Your change in quarters: " + quarter + " dimes " + dimes + " nickels " + nickels);
    }
 
@@ -85,4 +87,23 @@ public class Money {
 //        }
 //    }
 }
+//    public void returnChangeInCoins(BigDecimal changeDue){
+//
+//        while (changeDue.compareTo(new BigDecimal(0.00))!=-1) {
+//
+//            if (changeDue.compareTo(new BigDecimal(0.25)) >= 0) {
+//                changeDue = changeDue.subtract(new BigDecimal(0.25));
+//                quarter++;
+//            } else if (changeDue.compareTo(new BigDecimal(0.10)) >= 0) {
+//                changeDue = changeDue.subtract(new BigDecimal(0.10));
+//                dimes++;
+//            }
+//
+//            else { //(changeDue.compareTo(new BigDecimal(0.05)) >= 0)
+//                changeDue = changeDue.subtract(new BigDecimal(0.05));
+//                nickels++;
+//            }
+//        }
+//        System.out.println("Your change in quarters: " + quarter + " dimes " + dimes + " nickels " + nickels);
+//    }
 

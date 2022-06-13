@@ -66,7 +66,7 @@ public class Program {
 							System.out.println("How much money do you want to insert?");
 							System.out.println("(1) $1.00\n(2) $5.00\n(3) $10.00\n(4) $20.00\n(5) Stop adding money");
 							selection = scanner.nextLine();
-							if (selection.equals("1")) {        // TODO fix addition to moneyProvided (in writer as well)
+							if (selection.equals("1")) {
 								moneyProvided = moneyProvided.add(new BigDecimal("1.00"));
 								fileWriter.println(dateTimeStamp + " FEED MONEY" +" $" + new BigDecimal("1.00") + " $" + moneyProvided); //K added on 6/12
 							} else if (selection.equals("2")) {
@@ -127,20 +127,22 @@ public class Program {
 										System.out.println();// k added 6/12
 										fileWriter.flush();// k added 6/12
 										fileWriter.close();// k added 6/12
+
 										returnChangeInCoins.returnChangeInCoins(change);
 										change = new BigDecimal(0.00);
 										moneyProvided = new BigDecimal(0.00);
+										mainMenu();
 
 
 
-										break;
 									}
 
 									System.out.println();
-									// name, cost, money remaining and product message
+
 								} else if (moneyProvided.compareTo(price) <= 0) {
 									System.out.println("Insufficient money provided");
-									//return to second menu
+									mainMenu();
+
 								}
 							}
 							}catch (NullPointerException e){
@@ -153,9 +155,6 @@ public class Program {
 
 					}
 
-//					System.out.println();// k added 6/12
-//					fileWriter.flush();// k added 6/12
-//					fileWriter.close();// k added 6/12
 
 
 
@@ -170,5 +169,5 @@ public class Program {
 	}}
 
 
-//TODO gets stuck and does not continue after dispensing change when purchasing one item!
+
 

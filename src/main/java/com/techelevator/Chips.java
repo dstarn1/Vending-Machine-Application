@@ -3,7 +3,7 @@ package com.techelevator;
 import java.math.BigDecimal;
 
 public class Chips extends Product {
-    private String dispenseMsg = "Crunch crunch, Yum!";
+    private String dispenseMsg = "Crunch Crunch, Yum!";
 
     public Chips (String productName, BigDecimal price, String slotLocation) {
         super(productName, price, slotLocation);
