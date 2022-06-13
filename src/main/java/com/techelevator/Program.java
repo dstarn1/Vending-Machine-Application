@@ -23,7 +23,7 @@ public class Program {
 
 
 		try{
-			String salesLogDestination = "C:/Users/Student/Documents/SalesLog.txt";//K added 6/12
+			String salesLogDestination = "C:/Users/Student/Documents/SalesLog.txt";//K added 6/12 ** may have to change
 			File salesLog = new File(salesLogDestination) ;//K added 6/12
 			PrintWriter fileWriter = new PrintWriter(salesLog);//
 			//K added 6/12
@@ -95,13 +95,13 @@ public class Program {
 							Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
 
 							//for (String slotProduct: machine.getSlotProducts().keySet()){
-
+							try{
 							if (userProductChoice.getProductQuantity() == 0) {
 								System.out.println("Sorry, this item is sold out.");
 								//mainMenu();
 							} else if (!machine.getSlotProducts().containsKey(userSelection)) {
 								System.out.println("Invalid selection. Have fun going back to main menu.");
-								//mainMenu();
+								mainMenu();
 							} else {
 								System.out.println();
 								//get price
@@ -141,8 +141,11 @@ public class Program {
 								} else if (moneyProvided.compareTo(price) <= 0) {
 									System.out.println("Insufficient money provided");
 									//return to second menu
-								} break; //ko added
-							} break; //ko added to try to fix stuck after dispense
+								}
+							}
+							}catch (NullPointerException e){
+								System.out.println("Invalid Selection");
+							}
 
 
 						} while (!selection.equals("3"));
@@ -167,5 +170,5 @@ public class Program {
 	}}
 
 
-//TODO gets stuck and does not continue after dispending change when purchasing one item!
-// TODO does not dispense change if more than two items are purchased
+//TODO gets stuck and does not continue after dispensing change when purchasing one item!
+
