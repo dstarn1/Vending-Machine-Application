@@ -111,7 +111,7 @@ public class Program {
 								if (moneyProvided.compareTo(price) > 0) {
 									change = moneyProvided.subtract(price);
 									System.out.println("Item name: " + userProductChoice.getProductName() + " Cost of item $" + price + " Money remaining $" + change);
-									fileWriter.println(dateTimeStamp + userProductChoice.getProductName() + userProductChoice.getSlotLocation() + userProductChoice.getPrice() + (moneyProvided.subtract(userProductChoice.getPrice()))); // k added 6/12
+									fileWriter.println(dateTimeStamp + " " +userProductChoice.getProductName() + " "+ userProductChoice.getSlotLocation() + " $" + userProductChoice.getPrice() + " $" + (moneyProvided.subtract(userProductChoice.getPrice()))); // k added 6/12
 
 									userProductChoice.getPrice();
 									userProductChoice.setProductQuantity(userProductChoice.getProductQuantity() - 1);
@@ -123,10 +123,14 @@ public class Program {
 									if(selection.equals("2")){
 										System.out.println("Dispensing change: $" + change);
 										Money returnChangeInCoins = new Money();
+										fileWriter.println(dateTimeStamp + " GIVE CHANGE: " + "$"+ change + " $0.00"); // k added 6/12
+										System.out.println();// k added 6/12
+										fileWriter.flush();// k added 6/12
+										fileWriter.close();// k added 6/12
 										returnChangeInCoins.returnChangeInCoins(change);
 										change = new BigDecimal(0.00);
 										moneyProvided = new BigDecimal(0.00);
-										fileWriter.println(dateTimeStamp + "GIVE CHANGE: " + change + "$0.00"); // k added 6/12
+
 
 
 										break;
@@ -146,9 +150,9 @@ public class Program {
 
 					}
 
-					System.out.println();
-					fileWriter.flush();
-					fileWriter.close();
+//					System.out.println();// k added 6/12
+//					fileWriter.flush();// k added 6/12
+//					fileWriter.close();// k added 6/12
 
 
 
