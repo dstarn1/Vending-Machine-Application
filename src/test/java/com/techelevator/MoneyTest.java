@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MoneyTest {
 
@@ -14,7 +15,7 @@ public class MoneyTest {
 
         Money returnChangeInCoins = new Money();
 
-        Assert.assertEquals("Your change in quarters: " + 22 + " dimes: " + 0 + " nickels: " + 1, returnChangeInCoins.returnChangeInCoins(BigDecimal.valueOf(5.55)));
+        Assert.assertEquals("Your change in quarters: " + 22 + " dimes: " + 0 + " nickels: " + 1, returnChangeInCoins.returnChangeInCoins( BigDecimal.valueOf(5.55)));
     }
     @Test
 
@@ -26,7 +27,7 @@ public class MoneyTest {
 
     public void test_return_Change_In_Coins_3() {
         Money returnChangeInCoins = new Money();
-        Assert.assertEquals("Your change in quarters: " + 31 + " dimes: " + 1 + " nickels: " + 1, returnChangeInCoins.returnChangeInCoins(new BigDecimal(7.90)));
+        Assert.assertEquals("Your change in quarters: " + 31 + " dimes: " + 1 + " nickels: " + 1, returnChangeInCoins.returnChangeInCoins( BigDecimal.valueOf(7.90)));
 
 
 

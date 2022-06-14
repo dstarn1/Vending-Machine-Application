@@ -1,58 +1,36 @@
 package com.techelevator;
 
-import org.w3c.dom.ls.LSOutput;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 import static com.techelevator.Program.mainMenu;
 
 public class Money {
-    private BigDecimal amountOwed;
-    private BigDecimal amountPaid;
+
     private BigDecimal changeDue;
     private int quarter = 0;
     private int dimes = 0;
     private int nickels =0;
 
-
-//    public Money(VendingMachine machine) {
-//            this.machine = machine;
-//    }
-
-    public BigDecimal getAmountOwed() {
-        return amountOwed;
-    }
-
-    public BigDecimal getAmountPaid() {
-        return amountPaid;
-    }
-
-    public void setAmountOwed(BigDecimal amountOwed) {
-        this.amountOwed = amountOwed;
-    }
-
-    public void setAmountPaid(BigDecimal amountPaid) {
-        this.amountPaid = amountPaid;
-    }
-    public BigDecimal getChangeDue() {
-        changeDue= amountPaid.subtract(amountOwed);
-        return changeDue;
-    }
     public String returnChangeInCoins(BigDecimal changeDue){
 
-        while (changeDue.compareTo(BigDecimal.valueOf(0.00))!=-1) {
+        while (changeDue.compareTo(new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP))!=-1 && changeDue.compareTo(new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP))!=0 ) {
 
-            if (changeDue.compareTo(BigDecimal.valueOf(0.25)) >= 0) {
-                changeDue = changeDue.subtract(BigDecimal.valueOf(0.25));
+            if (changeDue.compareTo(new BigDecimal("0.25").setScale(2, RoundingMode.HALF_UP)) >= 0) {
+                changeDue = changeDue.subtract(new BigDecimal(0.25).setScale(2, RoundingMode.HALF_UP));
                 quarter++;
-            } else if (changeDue.compareTo(BigDecimal.valueOf(0.10)) >= 0) {
-                changeDue = changeDue.subtract(BigDecimal.valueOf(0.10));
+            } else if (changeDue.compareTo(new BigDecimal("0.10").setScale(2, RoundingMode.HALF_UP)) >= 0) {
+                changeDue = changeDue.subtract(new BigDecimal("0.10").setScale(2, RoundingMode.HALF_UP));
                 dimes++;
             }
 
         else { //(changeDue.compareTo(new BigDecimal(0.05)) >= 0)
-                changeDue = changeDue.subtract(BigDecimal.valueOf(0.05));
+                changeDue = changeDue.subtract(new BigDecimal("0.05").setScale(2, RoundingMode.HALF_UP));
                 nickels++;
             }
         }
@@ -61,51 +39,81 @@ public class Money {
        /// just changed the method to return a string, and put system.out.println in main program
    }
 
-//    public void purchaseMenu() {
-//        Money money = new Money(machine);
+
+//   public void purchaseMenu(BigDecimal moneyProvided, String dateTimeStamp, String salesLog) throws IOException {
+//       Scanner selection = new Scanner(System.in);
+//       Scanner scanner = new Scanner(System.in);
+//       VendingMachine machine = new VendingMachine();
+//       FileWriter fileWriter = new FileWriter(salesLog);
+//       if (selection.equals("2")) {
+//           do {
+//               System.out.println("Please enter your selection eg. 'A3'");
+//               String userSelection = scanner.nextLine().toUpperCase();
 //
-//        Scanner purchaseMenu = new Scanner(System.in);
-//        // VendingMachine machine;
-//        System.out.println("(1) Feed Money\n(2) Select Product\n(3) Finish Transaction");
-//        String selection = purchaseMenu.nextLine();
+//
+//               Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
 //
 //
-//        System.out.println("Please enter your selection eg. 'A3'");
-//        String userSelection = purchaseMenu.nextLine().toUpperCase();
+//               try{
+//                   if (userProductChoice.getProductQuantity() == 0) {
+//                       System.out.println("Sorry, this item is sold out.");
+//                       //mainMenu();
+//                   } else if (!machine.getSlotProducts().containsKey(userSelection)) {
+//                       System.out.println("Invalid selection. Have fun going back to main menu.");
+//                       mainMenu();
+//                   } else {
+//                       System.out.println();
+//                       //get price
+//                       BigDecimal price = userProductChoice.getPrice();
+//                       BigDecimal change;
+//                       // outputs 1 if moneyProvided is greater - change is due, 0 if equal, -1 if less than
+//                       if (moneyProvided.compareTo(price) > 0) {
+//                           change = moneyProvided.subtract(price);
+//                           System.out.println("Item name: " + userProductChoice.getProductName() + " Cost of item $" + price + " Money remaining $" + change);
+//                           fileWriter.println(dateTimeStamp + " " +userProductChoice.getProductName() + " "+ userProductChoice.getSlotLocation() + " $" + userProductChoice.getPrice() + " $" + (moneyProvided.subtract(userProductChoice.getPrice()))); // k added 6/12
 //
-//        //TODO have to hit enter twice. need to fix
-//        Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
+//                           userProductChoice.getPrice();
+//                           userProductChoice.setProductQuantity(userProductChoice.getProductQuantity() - 1);
+//                           System.out.println("Dispensing ");
+//                           System.out.println(userProductChoice.getDispenseMsg());
+//                           System.out.println();
+//                           System.out.println("(1) Make another selection\n(2) Finish Transaction");
+//                           selection = scanner.nextLine();
+//                           if(selection.equals("1")){
+//                               break;
+//                           }
+//                           if(selection.equals("2")){
+//                               System.out.println("Dispensing change: $" + change);
+//                               Money returnChangeInCoins = new Money();
+//                               fileWriter.println(dateTimeStamp + " GIVE CHANGE: " + "$"+ change + " $0.00"); // k added 6/12
+//                               System.out.println();// k added 6/12
+//                               fileWriter.flush();// k added 6/12
+//                               fileWriter.close();// k added 6/12
 //
-//        //for (String slotProduct: machine.getSlotProducts().keySet()){
+//                               System.out.println(returnChangeInCoins.returnChangeInCoins(change));
+//                               change = new BigDecimal(0.00);
+//                               moneyProvided = new BigDecimal(0.00);
+//                               System.out.println();
+//                               mainMenu();
 //
-//        if (userProductChoice.getProductQuantity() == 0) {
-//            System.out.println("Sorry, this item is sold out.");
-//            mainMenu();
-//        } else if (!machine.getSlotProducts().containsKey(userSelection)) {
-//            System.out.println("Invalid selection. Have fun going back to main menu.");
-//            mainMenu();
-//        } else {
-//            userProductChoice.setProductQuantity(userProductChoice.getProductQuantity() - 1);
-//        }
-//    }
+//
+//
+//                           }
+//
+//                           System.out.println();
+//
+//                       } else if (moneyProvided.compareTo(price) <= 0) {
+//                           System.out.println("Insufficient money provided");
+//                           mainMenu();
+//
+//                       }
+//                   }
+//               }catch (NullPointerException e){
+//                   System.out.println("Invalid Selection");
+//               }
+   //}
+
 }
-//    public void returnChangeInCoins(BigDecimal changeDue){
-//
-//        while (changeDue.compareTo(new BigDecimal(0.00))!=-1) {
-//
-//            if (changeDue.compareTo(new BigDecimal(0.25)) >= 0) {
-//                changeDue = changeDue.subtract(new BigDecimal(0.25));
-//                quarter++;
-//            } else if (changeDue.compareTo(new BigDecimal(0.10)) >= 0) {
-//                changeDue = changeDue.subtract(new BigDecimal(0.10));
-//                dimes++;
-//            }
-//
-//            else { //(changeDue.compareTo(new BigDecimal(0.05)) >= 0)
-//                changeDue = changeDue.subtract(new BigDecimal(0.05));
-//                nickels++;
-//            }
-//        }
-//        System.out.println("Your change in quarters: " + quarter + " dimes " + dimes + " nickels " + nickels);
-//    }
+
+
 

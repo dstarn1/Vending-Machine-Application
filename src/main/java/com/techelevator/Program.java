@@ -19,7 +19,7 @@ public class Program {
 		Scanner scanner = new Scanner(System.in);
 		VendingMachine machine = new VendingMachine();
 		String userInput;
-		BigDecimal moneyProvided = new BigDecimal(0.00);
+		BigDecimal moneyProvided = new BigDecimal("0.00");
 
 
 		try{
@@ -80,6 +80,7 @@ public class Program {
 								fileWriter.println(dateTimeStamp + " FEED MONEY" +" $" + new BigDecimal("20.00") + " $" + moneyProvided); //K added on 6/12
 							} else if (!selection.equals("5")) {
 								System.out.println("Invalid input");
+								System.out.println();
 							}
 							System.out.println("Current Money Provided: $" + moneyProvided);
 							System.out.println();
@@ -91,10 +92,10 @@ public class Program {
 							System.out.println("Please enter your selection eg. 'A3'");
 							String userSelection = scanner.nextLine().toUpperCase();
 
-							//TODO have to hit enter twice. need to fix
+
 							Product userProductChoice = machine.getSlotProducts().get(userSelection); //getting value from slot products
 
-							//for (String slotProduct: machine.getSlotProducts().keySet()){
+
 							try{
 							if (userProductChoice.getProductQuantity() == 0) {
 								System.out.println("Sorry, this item is sold out.");
@@ -120,6 +121,9 @@ public class Program {
 									System.out.println();
 									System.out.println("(1) Make another selection\n(2) Finish Transaction");
 									selection = scanner.nextLine();
+									if(selection.equals("1")){
+										break;
+									}
 									if(selection.equals("2")){
 										System.out.println("Dispensing change: $" + change);
 										Money returnChangeInCoins = new Money();
