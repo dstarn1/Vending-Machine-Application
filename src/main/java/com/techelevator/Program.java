@@ -128,9 +128,10 @@ public class Program {
 										fileWriter.flush();// k added 6/12
 										fileWriter.close();// k added 6/12
 
-										returnChangeInCoins.returnChangeInCoins(change);
+										System.out.println(returnChangeInCoins.returnChangeInCoins(change));
 										change = new BigDecimal(0.00);
 										moneyProvided = new BigDecimal(0.00);
+										System.out.println();
 										mainMenu();
 
 

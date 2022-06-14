@@ -39,7 +39,7 @@ public class Money {
         changeDue= amountPaid.subtract(amountOwed);
         return changeDue;
     }
-    public void returnChangeInCoins(BigDecimal changeDue){
+    public String returnChangeInCoins(BigDecimal changeDue){
 
         while (changeDue.compareTo(BigDecimal.valueOf(0.00))!=-1) {
 
@@ -56,7 +56,9 @@ public class Money {
                 nickels++;
             }
         }
-        System.out.println("Your change in quarters: " + quarter + " dimes " + dimes + " nickels " + nickels);
+        String changeInCoins ="Your change in quarters: " + quarter + " dimes: " + dimes + " nickels: " + nickels;
+       return changeInCoins;
+       /// just changed the method to return a string, and put system.out.println in main program
    }
 
 //    public void purchaseMenu() {
